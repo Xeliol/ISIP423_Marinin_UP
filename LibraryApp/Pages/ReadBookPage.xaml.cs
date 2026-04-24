@@ -16,21 +16,18 @@ using System.Windows.Shapes;
 namespace LibraryApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для ReadBookPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class ReadBookPage : Page
     {
-        public MainPage()
+        Books book;
+        public ReadBookPage(Books bk)
         {
             InitializeComponent();
-        }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-            }
+            book = bk;
+
+            this.DataContext = book;
         }
     }
 }

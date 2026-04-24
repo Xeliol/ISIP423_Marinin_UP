@@ -16,29 +16,25 @@ using System.Windows.Shapes;
 namespace LibraryApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для CatalogPage.xaml
+    /// Логика взаимодействия для BookPage.xaml
     /// </summary>
-    public partial class CatalogPage : Page
+    public partial class BookPage : Page
     {
-        public CatalogPage()
+        Books book;
+        public BookPage(Books bk)
         {
             InitializeComponent();
 
-            BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.Frozen == false).ToList();
+            book = bk;
+
+            this.DataContext = book;
+
+            ReviewsListbox.ItemsSource = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-
-            if (btn != null)
-            {
-                Books book = btn.DataContext as Books;
-                if (book != null)
-                {
-                    NavigationService.Navigate(new BookPage(book));
-                }
-            }
+            NavigationService.Navigate(new ReadBookPage(book));
         }
     }
 }
