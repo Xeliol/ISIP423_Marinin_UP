@@ -42,13 +42,33 @@
             </StackPanel>
             <Button Background="Yellow" HorizontalAlignment="Left" Width="100" Margin="5">Жалоба на книгу</Button>
             <Button Background="Yellow" HorizontalAlignment="Left" Width="120" Margin="5">Жалоба на автора</Button>
-            <Button Background="Cyan" HorizontalAlignment="Left" Width="120" Margin="5">Заморозить</Button>
-            <TextBox Width="400" Height="75" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBox>
-            <Button Background="#131326" HorizontalAlignment="Left" Foreground="White" Width="100" Margin="5">Отправить</Button>
+            <Button x:Name="FreezeButton" Background="Cyan" HorizontalAlignment="Left" Width="120" Margin="5" Click="FreezeButton_Click">Заморозить</Button>
+            <TextBox x:Name="ReviewTextBox" TextWrapping="Wrap" Width="400" Height="50" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="1" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="2" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="3" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="4" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="5" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="6" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="7" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="8" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="9" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+                <RadioButton Content="10" Margin="5 10" GroupName="ReviewGroup" Checked="RadioButton_Checked" />
+            </StackPanel>
+            <Button Background="#131326" HorizontalAlignment="Left" Foreground="White" Width="100" Margin="5" Click="SendButton">Отправить</Button>
             <ListBox x:Name="ReviewsListbox" Grid.Row="1" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="FloralWhite">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Genres.Name}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <Image Source="{Binding Users.ImagePath}" Width="50"/>
+                                <TextBlock Text="{Binding Users.Name}"></TextBlock>
+                                <TextBlock FontWeight="Bold" Text="{Binding Rating, StringFormat={}{0}/10}"></TextBlock>
+                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5">Жалоба на отзыв</Button>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
                 <ListBox.ItemsPanel>

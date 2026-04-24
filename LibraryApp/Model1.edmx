@@ -63,6 +63,7 @@
           </Key>
           <Property Name="ReportID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BookID" Type="int" />
+          <Property Name="UserID" Type="int" />
           <Property Name="ReviewID" Type="int" />
           <Property Name="TypeID" Type="int" Nullable="false" />
           <Property Name="Solved" Type="bit" Nullable="false" />
@@ -83,6 +84,7 @@
           <Property Name="BookID" Type="int" Nullable="false" />
           <Property Name="Text" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Frozen" Type="bit" Nullable="false" />
+          <Property Name="Rating" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RoleRequests">
           <Key>
@@ -236,6 +238,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reports_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reviews_Books">
           <End Role="Books" Type="Self.Books" Multiplicity="1" />
           <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
@@ -347,6 +361,10 @@
             <End Role="Reviews" EntitySet="Reviews" />
             <End Role="Reports" EntitySet="Reports" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reports_Users" Association="Self.FK_Reports_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reviews_Books" Association="Self.FK_Reviews_Books">
             <End Role="Books" EntitySet="Books" />
             <End Role="Reviews" EntitySet="Reviews" />
@@ -444,12 +462,14 @@
           </Key>
           <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BookID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
           <Property Name="ReviewID" Type="Int32" />
           <Property Name="TypeID" Type="Int32" Nullable="false" />
           <Property Name="Solved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Books" Relationship="Self.FK_Reports_Books" FromRole="Reports" ToRole="Books" />
           <NavigationProperty Name="ReportTypes" Relationship="Self.FK_Reports_ReportTypes" FromRole="Reports" ToRole="ReportTypes" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Reports_Reviews" FromRole="Reports" ToRole="Reviews" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Reports_Users" FromRole="Reports" ToRole="Users" />
         </EntityType>
         <EntityType Name="ReportTypes">
           <Key>
@@ -468,6 +488,7 @@
           <Property Name="BookID" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Frozen" Type="Boolean" Nullable="false" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Books" Relationship="Self.FK_Reviews_Books" FromRole="Reviews" ToRole="Books" />
           <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_Reviews" FromRole="Reviews" ToRole="Reports" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Reviews_Users" FromRole="Reviews" ToRole="Users" />
@@ -519,6 +540,7 @@
           <Property Name="Frozen" Type="Boolean" Nullable="false" />
           <Property Name="ImagePath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Books" Relationship="Self.FK_Books_Users" FromRole="Users" ToRole="Books" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_Users" FromRole="Users" ToRole="Reports" />
           <NavigationProperty Name="Reviews" Relationship="Self.FK_Reviews_Users" FromRole="Users" ToRole="Reviews" />
           <NavigationProperty Name="RoleRequests" Relationship="Self.FK_RoleRequests_Users" FromRole="Users" ToRole="RoleRequests" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
@@ -644,6 +666,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reports_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reports" Type="Self.Reports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Reports">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reviews_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
@@ -747,6 +781,10 @@
             <End Role="Reviews" EntitySet="Reviews" />
             <End Role="Reports" EntitySet="Reports" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reports_Users" Association="Self.FK_Reports_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reports" EntitySet="Reports" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reviews_Users" Association="Self.FK_Reviews_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Reviews" EntitySet="Reviews" />
@@ -833,6 +871,7 @@
               <MappingFragment StoreEntitySet="Reports">
                 <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
                 <ScalarProperty Name="TypeID" ColumnName="TypeID" />
                 <ScalarProperty Name="Solved" ColumnName="Solved" />
@@ -855,6 +894,7 @@
                 <ScalarProperty Name="BookID" ColumnName="BookID" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Frozen" ColumnName="Frozen" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

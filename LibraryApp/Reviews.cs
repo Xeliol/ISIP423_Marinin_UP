@@ -25,6 +25,7 @@ namespace LibraryApp
         public int BookID { get; set; }
         public string Text { get; set; }
         public bool Frozen { get; set; }
+        public int Rating { get; set; }
     
         public virtual Books Books { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

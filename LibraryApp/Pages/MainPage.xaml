@@ -23,10 +23,8 @@
             <Button x:Name="Admin" Width="100" Height="50" Margin="5" ToolTip="Администрирование"></Button>
             <Button Width="100" Height="50" Margin="5" ToolTip="Страница Автора"></Button>
             <TextBlock Foreground="Yellow" TextAlignment="Center">!!! Аккаунт Заморожен !!!</TextBlock>
-            <Button Width="100" Height="50" Margin="5" ToolTip="Профиль"></Button>
+            <Button Width="100" Height="50" Margin="5" ToolTip="Профиль" Click="AccountButton_Click"></Button>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Column="1" Source="CatalogPage.xaml" NavigationUIVisibility="Hidden"/>
-
-        <Button Background="#131326" Grid.Column="1" Foreground="White" Width="100" Height="20" Margin="5" Click="Back_Click" HorizontalAlignment="Right" VerticalAlignment="Top">Вернуться</Button>
     </Grid>
 </Page>

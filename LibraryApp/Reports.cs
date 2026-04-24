@@ -16,6 +16,7 @@ namespace LibraryApp
     {
         public int ReportID { get; set; }
         public Nullable<int> BookID { get; set; }
+        public Nullable<int> UserID { get; set; }
         public Nullable<int> ReviewID { get; set; }
         public int TypeID { get; set; }
         public bool Solved { get; set; }
@@ -23,5 +24,6 @@ namespace LibraryApp
         public virtual Books Books { get; set; }
         public virtual ReportTypes ReportTypes { get; set; }
         public virtual Reviews Reviews { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace LibraryApp
         public Users()
         {
             this.Books = new HashSet<Books>();
+            this.Reports = new HashSet<Reports>();
             this.Reviews = new HashSet<Reviews>();
             this.RoleRequests = new HashSet<RoleRequests>();
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
@@ -34,6 +35,8 @@ namespace LibraryApp
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Books> Books { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reports> Reports { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reviews> Reviews { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

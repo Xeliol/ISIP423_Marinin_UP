@@ -25,11 +25,13 @@ namespace LibraryApp.Pages
             InitializeComponent();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
+        private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NavigationService.CanGoBack)
+            Users user = NavigationData.CurrentData as Users;
+            if (user != null) {
+            }else
             {
-                NavigationService.GoBack();
+                NavigationService.Navigate(new SignInPage());
             }
         }
     }

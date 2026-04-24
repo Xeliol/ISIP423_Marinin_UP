@@ -21,11 +21,19 @@ namespace LibraryApp.Pages
     public partial class BookPage : Page
     {
         Books book;
+        Users user;
+        int rating = -1;
+
         public BookPage(Books bk)
         {
             InitializeComponent();
 
             book = bk;
+            user = NavigationData.CurrentData as Users;
+            if (user == null || user.RoleID != 3)
+            {
+                FreezeButton.Visibility = Visibility.Collapsed;
+            }
 
             this.DataContext = book;
 
@@ -35,6 +43,58 @@ namespace LibraryApp.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ReadBookPage(book));
+        }
+
+        private void SendButton(object sender, RoutedEventArgs e)
+        {
+            if (user != null)
+            {
+                if (ReviewTextBox.Text != "")
+                {
+                    if(rating != -1)
+                    {
+                        Core.Context.Reviews.Add(new Reviews
+                        {
+                            BookID = book.BookID,
+                            UserID = user.UserID,
+                            Frozen = false,
+                            Text = ReviewTextBox.Text,
+                            Rating = rating
+                        });
+                        Core.Context.SaveChanges();
+
+                        Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
+                        if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Count() > 0)
+                        {
+                            cur_book.Rating = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Select(r => r.Rating).Average();
+                            Core.Context.SaveChanges();
+                        }
+                        ReviewsListbox.ItemsSource = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).ToList();
+                    }
+                    else MessageBox.Show("Выберите оценку.");
+                }
+                else MessageBox.Show("Отзыв пуст.");
+            }
+            else MessageBox.Show("Надо войти в аккаунт, чтобы оставить отзыв.");
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rdbt = sender as RadioButton;
+            if (rdbt != null)
+            {
+                rating = Convert.ToInt32(rdbt.Content.ToString());
+            }
+        }
+
+        private void FreezeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
+            if (cur_book != null)
+            {
+                cur_book.Frozen = true;
+                Core.Context.SaveChanges();
+            }
         }
     }
 }

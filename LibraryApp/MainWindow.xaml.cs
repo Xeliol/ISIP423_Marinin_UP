@@ -23,6 +23,24 @@ namespace LibraryApp
         public MainWindow()
         {
             InitializeComponent();
+
+            NavigationData.CurrentData = null;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            if (MainFrame.NavigationService.CanGoBack)
+            {
+                MainFrame.NavigationService.GoBack();
+            }
+        }
+    }
+
+    public static class NavigationData
+    {
+        public static object CurrentData
+        {
+            get; set;
         }
     }
 }
