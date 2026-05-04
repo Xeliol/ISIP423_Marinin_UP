@@ -24,27 +24,11 @@ namespace LibraryApp.Pages
 
         public BookListsPage()
         {
-            user = NavigationData.CurrentData as Users;
-
-            if (user != null)
-            {
-                if(Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
-                {
-                    for(int i = 1; i <= 4; i++)
-                    {
-                        Core.Context.Lists.Add(new Lists
-                        {
-                            UserID = user.UserID,
-                            TypeID = i
-                        });
-                        Core.Context.SaveChanges();
-                    }
-                }
-            }
-
             InitializeComponent();
 
-            ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+            user = NavigationData.CurrentData as Users;
+
+            ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -91,7 +75,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -134,7 +118,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -177,7 +161,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -220,7 +204,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {

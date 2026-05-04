@@ -18,6 +18,7 @@ namespace LibraryApp
         public Reviews()
         {
             this.Reports = new HashSet<Reports>();
+            this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
         }
     
         public int ReviewID { get; set; }
@@ -31,5 +32,7 @@ namespace LibraryApp
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reports> Reports { get; set; }
         public virtual Users Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
     }
 }

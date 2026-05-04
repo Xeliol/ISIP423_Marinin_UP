@@ -22,6 +22,7 @@ namespace LibraryApp
             this.Reviews = new HashSet<Reviews>();
             this.RoleRequests = new HashSet<RoleRequests>();
             this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
+            this.UnfreezeRequests1 = new HashSet<UnfreezeRequests>();
         }
     
         public int UserID { get; set; }
@@ -44,5 +45,7 @@ namespace LibraryApp
         public virtual Roles Roles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnfreezeRequests> UnfreezeRequests1 { get; set; }
     }
 }

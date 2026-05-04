@@ -1,4 +1,4 @@
-﻿<Page x:Class="LibraryApp.Pages.CatalogPage"
+﻿<Page x:Class="LibraryApp.Pages.AuthorPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,28 +6,30 @@
       xmlns:local="clr-namespace:LibraryApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CatalogPage">
+      Title="AuthorPage">
 
-    <Grid Background="White">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBox x:Name="SearchBox" Margin="5" Width="200" Height="20" TextChanged="TextBox_TextChanged"></TextBox>
-            <ComboBox Margin="5" Width="100" Height="20" x:Name="GenreSortBox" VerticalAlignment="Center" SelectionChanged="TypeSortBox_SelectionChanged"></ComboBox>
-            <Button Margin="5" Width="100" Height="20" x:Name="NameSort" VerticalAlignment="Center" Content="Name🔼🔽" Click="NameSort_Click"></Button>
-            <Button Margin="5" Width="100" Height="20" x:Name="RatingSort" VerticalAlignment="Center" Content="Rating🔼🔽" Click="RatingSort_Click"></Button>
-        </StackPanel>
-        
-        <ListBox x:Name="BooksListBox" Grid.Row="1" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White">
+        <ListBox x:Name="BooksListBox" Grid.Column="0" BorderThickness="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Height="450" Width="250">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Background" Value="White" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
                         <Image Source="{Binding ImagePath}" Margin="10"/>
                         <TextBlock FontSize="18" Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Users.Name, StringFormat={}Автор: {0}}"/>
@@ -47,21 +49,21 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Background="DodgerBlue" Margin="5" Click="ReadingClick">
-                                <Image Source="/Images/Icons/book.png" Width="20"/>
-                            </Button>
-                            <Button Background="Coral" Margin="5" Click="LaterClick">
-                                <Image Source="/Images/Icons/clock.png" Width="20"/>
-                            </Button>
-                            <Button Background="ForestGreen" Margin="5" Click="FinishedClick">
-                                <Image Source="/Images/Icons/Check.png" Width="20"/>
-                            </Button>
-                            <Button Background="Gray" Margin="5" Click="AbandonedClick">
-                                <Image Source="/Images/Icons/trash.png" Width="20"/>
-                            </Button>
-                        </StackPanel>
                         <Button Background="#131326" Foreground="White" Width="100" Margin="5" Click="Button_Click">Читать</Button>
+                        <Button Background="Orange" Foreground="Black" Width="150" Margin="5" Click="Edit_Click">Редактировать</Button>
+                        <Button Background="Blue" Foreground="White" Width="120" Margin="5" Click="RequestUnfreeze_Click" Content="Оспорить заморозку">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Background="Red" Foreground="White" Width="130" Margin="5" Click="Delete_Click">Удалить</Button>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -71,5 +73,9 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        
+        <StackPanel Grid.Column="2" Margin="0 50">
+            <Button x:Name="RequestUnfreeze" Background="ForestGreen" Foreground="White" Width="160" Margin="5" FontSize="20" Click="Create_Click" Content="Добавить книгу"></Button>
+        </StackPanel>
     </Grid>
 </Page>

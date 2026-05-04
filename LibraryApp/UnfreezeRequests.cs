@@ -16,7 +16,15 @@ namespace LibraryApp
     {
         public int RequestID { get; set; }
         public int UserID { get; set; }
+        public Nullable<int> ProfileID { get; set; }
+        public Nullable<int> BookID { get; set; }
+        public Nullable<int> ReviewID { get; set; }
+        public int TypeID { get; set; }
     
+        public virtual Books Books { get; set; }
+        public virtual ReportTypes ReportTypes { get; set; }
+        public virtual Reviews Reviews { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

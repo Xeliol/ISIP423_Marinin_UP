@@ -18,6 +18,7 @@ namespace LibraryApp
         public ReportTypes()
         {
             this.Reports = new HashSet<Reports>();
+            this.UnfreezeRequests = new HashSet<UnfreezeRequests>();
         }
     
         public int TypeID { get; set; }
@@ -25,5 +26,7 @@ namespace LibraryApp
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reports> Reports { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UnfreezeRequests> UnfreezeRequests { get; set; }
     }
 }

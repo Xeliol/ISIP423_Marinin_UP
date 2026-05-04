@@ -20,11 +20,46 @@ namespace LibraryApp.Pages
     /// </summary>
     public partial class CatalogPage : Page
     {
-        public CatalogPage()
+
+        bool SortRating = false;
+        bool SortName = false;
+
+        public CatalogPage(bool erase_history = false)
         {
             InitializeComponent();
 
+            if (erase_history)
+            {
+                this.Loaded += (s, e) => EraseHistory();
+            }
+
+            Users user = NavigationData.CurrentData as Users;
+
             BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.Frozen == false).ToList();
+
+            List<string> GenreSorts = Core.Context.Genres.Select(pt => pt.Name).ToList();
+
+            GenreSorts.Insert(0, "None");
+
+            GenreSortBox.ItemsSource = GenreSorts;
+
+            GenreSortBox.SelectedIndex = 0;
+
+        }
+
+        private void EraseHistory()
+        {
+            while (NavigationService.CanGoBack)
+            {
+                try
+                {
+                    NavigationService.RemoveBackEntry();
+                }
+                catch (Exception ex)
+                {
+                    break;
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,6 +78,8 @@ namespace LibraryApp.Pages
 
         private void ReadingClick(object sender, RoutedEventArgs e)
         {
+            CreateLists();
+
             Button btn = sender as Button;
 
             if (btn != null)
@@ -82,6 +119,8 @@ namespace LibraryApp.Pages
 
         private void LaterClick(object sender, RoutedEventArgs e)
         {
+            CreateLists();
+
             Button btn = sender as Button;
 
             if (btn != null)
@@ -123,6 +162,8 @@ namespace LibraryApp.Pages
 
         private void FinishedClick(object sender, RoutedEventArgs e)
         {
+            CreateLists();
+
             Button btn = sender as Button;
 
             if (btn != null)
@@ -164,6 +205,8 @@ namespace LibraryApp.Pages
 
         private void AbandonedClick(object sender, RoutedEventArgs e)
         {
+            CreateLists();
+
             Button btn = sender as Button;
 
             if (btn != null)
@@ -201,6 +244,70 @@ namespace LibraryApp.Pages
                     MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
                 }
             }
+        }
+
+        private void CreateLists()
+        {
+            Users user = NavigationData.CurrentData as Users;
+
+            if (user != null)
+            {
+                if (Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
+                {
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        Core.Context.Lists.Add(new Lists
+                        {
+                            UserID = user.UserID,
+                            TypeID = i
+                        });
+                        Core.Context.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SortBooks();
+            
+        }
+
+
+        //FIX THIS!!!
+        private void SortBooks()
+        {
+            //sort
+            List<Books> newsource = Core.Context.Books.ToList();
+            if (GenreSortBox.SelectedIndex == 0)
+            {
+                BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.Frozen == false).ToList();
+            }
+            else
+            {
+                //BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.Frozen == false).ToList();
+            }
+
+            List<Books> newsrc = new List<Books>();
+            foreach (Books p in BooksListBox.Items)
+            {
+                newsrc.Add(p);
+            }
+            if (SearchBox.Text.Length != 0)
+            {
+                BooksListBox.ItemsSource = newsrc.Where(p => p.Name.ToLower().Contains(SearchBox.Text.ToLower()));
+            }
+            else BooksListBox.ItemsSource = newsrc;
+        }
+
+        private void NameSort_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RatingSort_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

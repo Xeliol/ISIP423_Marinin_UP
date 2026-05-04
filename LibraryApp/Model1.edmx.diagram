@@ -4,36 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="514159ac76314e7892e79481312e334b" Name="Diagram1">
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Books" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.BooksGenres" Width="1.5" PointX="7.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.BooksLists" Width="1.5" PointX="7.5" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Genres" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Lists" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.ListTypes" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Reports" Width="1.5" PointX="7.5" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.ReportTypes" Width="1.5" PointX="5.25" PointY="16.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Reviews" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.RoleRequests" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Roles" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.UnfreezeRequests" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Marinin_LibraryModel.Users" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+      <Diagram DiagramId="e63560bf5794440e8b142368fecc46bc" Name="Diagram1">
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Books" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.BooksGenres" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.BooksLists" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Genres" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Lists" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.ListTypes" Width="1.5" PointX="3" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Reports" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.ReportTypes" Width="1.5" PointX="10.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Reviews" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.RoleRequests" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Roles" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.UnfreezeRequests" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Marinin_LibraryModel.Users" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Books_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_BooksGenres_Books" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_BooksLists_Books" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reports_Books" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reviews_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="Marinin_LibraryModel.FK_UnfreezeRequests_Books" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_BooksGenres_Genres" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_BooksLists_Lists" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Lists_ListTypes" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reports_ReportTypes" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reports_Reviews" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reports_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Marinin_LibraryModel.FK_UnfreezeRequests_ReportTypes" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Reviews_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Marinin_LibraryModel.FK_UnfreezeRequests_Reviews" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_RoleRequests_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="Marinin_LibraryModel.FK_UnfreezeRequests_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Marinin_LibraryModel.FK_UnfreezeRequests_Users1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

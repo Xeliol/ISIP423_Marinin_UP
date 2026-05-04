@@ -23,14 +23,21 @@ namespace LibraryApp.Pages
         public MainPage()
         {
             InitializeComponent();
+
+            Users user = NavigationData.CurrentData as Users;
+
+            this.DataContext = user;
+
+            MainFrame.NavigationService.Navigate(new CatalogPage(false));
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
         {
             Users user = NavigationData.CurrentData as Users;
             if (user != null) {
-                //Account
-            }else
+                MainFrame.NavigationService.Navigate(new ProfilePage());
+            }
+            else
             {
                 NavigationService.Navigate(new SignInPage());
             }
@@ -44,6 +51,23 @@ namespace LibraryApp.Pages
         private void ListsButton_Click(object sender, RoutedEventArgs e)
         {
             Users user = NavigationData.CurrentData as Users;
+
+            if (user != null)
+            {
+                if (Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
+                {
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        Core.Context.Lists.Add(new Lists
+                        {
+                            UserID = user.UserID,
+                            TypeID = i
+                        });
+                        Core.Context.SaveChanges();
+                    }
+                }
+            }
+
             if (user != null)
             {
                 MainFrame.NavigationService.Navigate(new BookListsPage());
@@ -52,6 +76,16 @@ namespace LibraryApp.Pages
             {
                 MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
             }
+        }
+
+        private void Author_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new AuthorPage());
+        }
+
+        private void Admin_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
