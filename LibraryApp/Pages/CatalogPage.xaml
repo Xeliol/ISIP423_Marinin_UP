@@ -13,7 +13,7 @@
         <ListBox x:Name="BooksListBox" Grid.Row="1" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Height="400" Width="250">
+                    <StackPanel Height="450" Width="250">
                         <Image Source="{Binding ImagePath}"/>
                         <TextBlock FontSize="18" Text="{Binding Name}"/>
                         <TextBlock Text="{Binding Users.Name, StringFormat={}Автор: {0}}"/>
@@ -32,6 +32,20 @@
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Background="DodgerBlue" Margin="5" Click="ReadingClick">
+                                <Image Source="/Images/Icons/book.png" Width="20"/>
+                            </Button>
+                            <Button Background="Coral" Margin="5" Click="LaterClick">
+                                <Image Source="/Images/Icons/clock.png" Width="20"/>
+                            </Button>
+                            <Button Background="ForestGreen" Margin="5" Click="FinishedClick">
+                                <Image Source="/Images/Icons/Check.png" Width="20"/>
+                            </Button>
+                            <Button Background="Gray" Margin="5" Click="AbandonedClick">
+                                <Image Source="/Images/Icons/trash.png" Width="20"/>
+                            </Button>
                         </StackPanel>
                         <Button Background="#131326" Foreground="White" Width="100" Margin="5" Click="Button_Click">Читать</Button>
                     </StackPanel>

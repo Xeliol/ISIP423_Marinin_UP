@@ -18,8 +18,8 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="0" Background="#131326" >
             <Label FontSize="15" FontWeight="Bold" Foreground="White" Margin="0 0 0 20">Читай, Пиши и не спиши</Label>
-            <Button Width="100" Height="50" Margin="5" ToolTip="Каталог"></Button>
-            <Button Width="100" Height="50" Margin="5" ToolTip="Списки Книг"></Button>
+            <Button Width="100" Height="50" Margin="5" ToolTip="Каталог" Click="CatalogButton_Click" ></Button>
+            <Button Width="100" Height="50" Margin="5" ToolTip="Списки Книг" Click="ListsButton_Click"></Button>
             <Button x:Name="Admin" Width="100" Height="50" Margin="5" ToolTip="Администрирование"></Button>
             <Button Width="100" Height="50" Margin="5" ToolTip="Страница Автора"></Button>
             <TextBlock Foreground="Yellow" TextAlignment="Center">!!! Аккаунт Заморожен !!!</TextBlock>

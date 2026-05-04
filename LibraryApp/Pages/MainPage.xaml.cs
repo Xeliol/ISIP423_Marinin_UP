@@ -29,9 +29,28 @@ namespace LibraryApp.Pages
         {
             Users user = NavigationData.CurrentData as Users;
             if (user != null) {
+                //Account
             }else
             {
                 NavigationService.Navigate(new SignInPage());
+            }
+        }
+
+        private void CatalogButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.NavigationService.Navigate(new CatalogPage());
+        }
+
+        private void ListsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Users user = NavigationData.CurrentData as Users;
+            if (user != null)
+            {
+                MainFrame.NavigationService.Navigate(new BookListsPage());
+            }
+            else
+            {
+                MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
             }
         }
     }

@@ -16,15 +16,35 @@ using System.Windows.Shapes;
 namespace LibraryApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для CatalogPage.xaml
+    /// Логика взаимодействия для BookListsPage.xaml
     /// </summary>
-    public partial class CatalogPage : Page
+    public partial class BookListsPage : Page
     {
-        public CatalogPage()
+        Users user;
+
+        public BookListsPage()
         {
+            user = NavigationData.CurrentData as Users;
+
+            if (user != null)
+            {
+                if(Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
+                {
+                    for(int i = 1; i <= 4; i++)
+                    {
+                        Core.Context.Lists.Add(new Lists
+                        {
+                            UserID = user.UserID,
+                            TypeID = i
+                        });
+                        Core.Context.SaveChanges();
+                    }
+                }
+            }
+
             InitializeComponent();
 
-            BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.Frozen == false).ToList();
+            ListsListBox.ItemsSource = Core.Context.Lists.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -33,7 +53,8 @@ namespace LibraryApp.Pages
 
             if (btn != null)
             {
-                Books book = btn.DataContext as Books;
+                BooksLists booklist = btn.DataContext as BooksLists;
+                Books book = booklist.Books;
                 if (book != null)
                 {
                     NavigationService.Navigate(new BookPage(book));
@@ -47,13 +68,13 @@ namespace LibraryApp.Pages
 
             if (btn != null)
             {
-                Books book = btn.DataContext as Books;
-
+                BooksLists booklist = btn.DataContext as BooksLists;
+                Books book = booklist.Books;
                 Users user = NavigationData.CurrentData as Users;
 
                 if (user != null && book != null)
                 {
-                    if(Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
+                    if (Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
                     {
                         BooksLists existing_booklist = Core.Context.BooksLists.First(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID);
                         Core.Context.BooksLists.Remove(existing_booklist);
@@ -64,16 +85,20 @@ namespace LibraryApp.Pages
 
                     if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
                     {
-                        Core.Context.BooksLists.Add(new BooksLists{
+                        Core.Context.BooksLists.Add(new BooksLists
+                        {
                             BookID = book.BookID,
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                    } else
+                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
+                    }
+                    else
                     {
                         MessageBox.Show("Уже в списке.");
                     }
-                } else
+                }
+                else
                 {
                     MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
                 }
@@ -86,8 +111,8 @@ namespace LibraryApp.Pages
 
             if (btn != null)
             {
-                Books book = btn.DataContext as Books;
-
+                BooksLists booklist = btn.DataContext as BooksLists;
+                Books book = booklist.Books;
                 Users user = NavigationData.CurrentData as Users;
 
                 if (user != null && book != null)
@@ -100,6 +125,7 @@ namespace LibraryApp.Pages
                     }
 
                     int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 2).ListID;
+
                     if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
                     {
                         Core.Context.BooksLists.Add(new BooksLists
@@ -108,6 +134,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
+                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
                     }
                     else
                     {
@@ -127,8 +154,8 @@ namespace LibraryApp.Pages
 
             if (btn != null)
             {
-                Books book = btn.DataContext as Books;
-
+                BooksLists booklist = btn.DataContext as BooksLists;
+                Books book = booklist.Books;
                 Users user = NavigationData.CurrentData as Users;
 
                 if (user != null && book != null)
@@ -141,6 +168,7 @@ namespace LibraryApp.Pages
                     }
 
                     int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 4).ListID;
+
                     if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
                     {
                         Core.Context.BooksLists.Add(new BooksLists
@@ -149,6 +177,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
+                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
                     }
                     else
                     {
@@ -168,8 +197,8 @@ namespace LibraryApp.Pages
 
             if (btn != null)
             {
-                Books book = btn.DataContext as Books;
-
+                BooksLists booklist = btn.DataContext as BooksLists;
+                Books book = booklist.Books;
                 Users user = NavigationData.CurrentData as Users;
 
                 if (user != null && book != null)
@@ -182,6 +211,7 @@ namespace LibraryApp.Pages
                     }
 
                     int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 1).ListID;
+
                     if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
                     {
                         Core.Context.BooksLists.Add(new BooksLists
@@ -190,6 +220,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
+                        ListsListBox.ItemsSource = Core.Context.Lists.ToList();
                     }
                     else
                     {

@@ -28,8 +28,14 @@ namespace LibraryApp.Pages
         {
             InitializeComponent();
 
-            book = bk;
             user = NavigationData.CurrentData as Users;
+
+            book = bk;
+            if (user != null)
+            {
+                book.RoleID = user.RoleID;
+            }
+
             if (user == null || user.RoleID != 3)
             {
                 FreezeButton.Visibility = Visibility.Collapsed;
@@ -96,5 +102,10 @@ namespace LibraryApp.Pages
                 Core.Context.SaveChanges();
             }
         }
+
+        private void ReviewFreeze_Click(object sender, RoutedEventArgs e)
+        {
+
+        }        
     }
 }
