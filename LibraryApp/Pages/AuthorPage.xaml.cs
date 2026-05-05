@@ -94,6 +94,10 @@ namespace LibraryApp.Pages
                 {
                     Core.Context.Books.Remove(book);
                     Core.Context.SaveChanges();
+
+                    Users user = NavigationData.CurrentData as Users;
+
+                    BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.AuthorID == user.UserID).ToList();
                 }
             }
         }

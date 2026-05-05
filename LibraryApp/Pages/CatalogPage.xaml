@@ -19,7 +19,7 @@
         
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBox x:Name="SearchBox" Margin="5" Width="200" Height="20" TextChanged="TextBox_TextChanged"></TextBox>
-            <ComboBox Margin="5" Width="100" Height="20" x:Name="GenreSortBox" VerticalAlignment="Center" SelectionChanged="TypeSortBox_SelectionChanged"></ComboBox>
+            <ComboBox Margin="5" Width="100" Height="20" x:Name="GenreSortBox" VerticalAlignment="Center" SelectionChanged="GenreSortBox_SelectionChanged"></ComboBox>
             <Button Margin="5" Width="100" Height="20" x:Name="NameSort" VerticalAlignment="Center" Content="Name🔼🔽" Click="NameSort_Click"></Button>
             <Button Margin="5" Width="100" Height="20" x:Name="RatingSort" VerticalAlignment="Center" Content="Rating🔼🔽" Click="RatingSort_Click"></Button>
         </StackPanel>
