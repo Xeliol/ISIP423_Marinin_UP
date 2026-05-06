@@ -105,7 +105,77 @@ namespace LibraryApp.Pages
 
         private void ReviewFreeze_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            if (btn != null)
+            {    
+                Reviews rev = btn.DataContext as Reviews;
 
-        }        
+                rev.Frozen = true;
+
+                Core.Context.SaveChanges();
+            }
+        }
+
+        private void BookReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.IsEnabled = false;
+                btn.Background = Brushes.Gray;
+                btn.Content = "Жалоба подана";
+
+                Core.Context.Reports.Add(new Reports
+                {
+                    BookID = book.BookID,
+                    TypeID = 1,
+                    Solved = false,
+                    SenderID = user.UserID
+                });
+                Core.Context.SaveChanges();
+            }
+        }
+
+        private void AuthorReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.IsEnabled = false;
+                btn.Background = Brushes.Gray;
+                btn.Content = "Жалоба подана";
+
+                Core.Context.Reports.Add(new Reports
+                {
+                    UserID = book.Users.UserID,
+                    TypeID = 3,
+                    Solved = false,
+                    SenderID = user.UserID
+                });
+                Core.Context.SaveChanges();
+            }
+        }
+
+        private void ReviewReport_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.IsEnabled = false;
+                btn.Background = Brushes.Gray;
+                btn.Content = "Жалоба подана";
+
+                Reviews rev = btn.DataContext as Reviews;
+
+                Core.Context.Reports.Add(new Reports
+                {
+                    ReviewID = rev.ReviewID,
+                    TypeID = 2,
+                    Solved = false,
+                    SenderID = user.UserID
+                });
+                Core.Context.SaveChanges();
+            }
+        }
     }
 }

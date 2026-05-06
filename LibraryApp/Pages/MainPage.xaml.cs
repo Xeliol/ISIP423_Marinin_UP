@@ -85,7 +85,7 @@ namespace LibraryApp.Pages
 
         private void Admin_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.NavigationService.Navigate(new AdminPage());
         }
     }
 }

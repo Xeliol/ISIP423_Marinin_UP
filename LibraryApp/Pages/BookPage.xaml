@@ -42,8 +42,8 @@
                     <Button Background="#131326" Foreground="White" Width="100" Margin="5" Click="Button_Click">Читать</Button>
                 </StackPanel>
             </StackPanel>
-            <Button Background="Yellow" HorizontalAlignment="Left" Width="100" Margin="5">Жалоба на книгу</Button>
-            <Button Background="Yellow" HorizontalAlignment="Left" Width="120" Margin="5">Жалоба на автора</Button>
+            <Button Background="Yellow" HorizontalAlignment="Left" Width="100" Margin="5" Click="BookReport_Click">Жалоба на книгу</Button>
+            <Button Background="Yellow" HorizontalAlignment="Left" Width="120" Margin="5" Click="AuthorReport_Click">Жалоба на автора</Button>
             <Button x:Name="FreezeButton" Background="Cyan" HorizontalAlignment="Left" Width="120" Margin="5" Click="FreezeButton_Click">Заморозить</Button>
             <TextBox x:Name="ReviewTextBox" TextWrapping="Wrap" Width="400" Height="50" HorizontalAlignment="Left" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBox>
             <StackPanel Orientation="Horizontal">
@@ -67,7 +67,7 @@
                                 <Image Source="{Binding Users.ImagePath}" Width="50"/>
                                 <TextBlock Text="{Binding Users.Name}"></TextBlock>
                                 <TextBlock FontWeight="Bold" Text="{Binding Rating, StringFormat={}{0}/10}"></TextBlock>
-                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5">Жалоба на отзыв</Button>
+                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Click="ReviewReport_Click">Жалоба на отзыв</Button>
                                 <Button Background="Cyan" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Content="Заморозить" Click="ReviewFreeze_Click">
                                     <Button.Style>
                                         <Style TargetType="Button">

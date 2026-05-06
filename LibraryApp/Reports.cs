@@ -15,6 +15,7 @@ namespace LibraryApp
     public partial class Reports
     {
         public int ReportID { get; set; }
+        public int SenderID { get; set; }
         public Nullable<int> BookID { get; set; }
         public Nullable<int> UserID { get; set; }
         public Nullable<int> ReviewID { get; set; }
@@ -25,5 +26,6 @@ namespace LibraryApp
         public virtual ReportTypes ReportTypes { get; set; }
         public virtual Reviews Reviews { get; set; }
         public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }
