@@ -38,7 +38,7 @@ namespace LibraryApp.Pages
                 Users user = NavigationData.CurrentData as Users;
                 Books book = btn.DataContext as Books;
 
-                if (book != null)
+                if (book != null && Core.Context.UnfreezeRequests.Where(ur => ur.TypeID == 1 && ur.BookID == book.BookID).Count() == 0)
                 {
                     Core.Context.UnfreezeRequests.Add(new UnfreezeRequests
                     {
@@ -46,6 +46,11 @@ namespace LibraryApp.Pages
                         TypeID = 1,
                         UserID = user.UserID,
                     });
+
+                    Core.Context.SaveChanges();
+                } else
+                {
+                    MessageBox.Show("Оспорение на рассмотрении.");
                 }
             }
         }
@@ -92,6 +97,12 @@ namespace LibraryApp.Pages
                 Books book = btn.DataContext as Books;
                 if (book != null)
                 {
+                    List<BooksGenres> genres = Core.Context.BooksGenres.Where(bg => bg.BookID == book.BookID).ToList();
+
+                    foreach (BooksGenres bg in genres)
+                    {
+                        Core.Context.BooksGenres.Remove(bg);
+                    }
                     Core.Context.Books.Remove(book);
                     Core.Context.SaveChanges();
 

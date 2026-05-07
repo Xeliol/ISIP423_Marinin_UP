@@ -24,30 +24,10 @@
             <Button Width="60" Height="60" Margin="5" ToolTip="Списки Книг" Click="ListsButton_Click" Background="#131326">
                 <Image Source="/Images/Icons/bookmark.png"/>
             </Button>
-            <Button x:Name="Admin" Width="60" Height="60" Margin="5" ToolTip="Администрирование" Background="#131326" Click="Admin_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RoleID}" Value="3">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+            <Button x:Name="Admin" Width="60" Height="60" Margin="5" ToolTip="Администрирование" Background="#131326" Click="Admin_Click" Visibility="Collapsed">
                 <Image Source="/Images/Icons/admin.png"/>
             </Button>
-            <Button Width="60" Height="60" Margin="5" ToolTip="Страница Автора" Background="#131326" Click="Author_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding RoleID}" Value="2">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
+            <Button x:Name="AuthorButton" Width="60" Height="60" Margin="5" ToolTip="Страница Автора" Background="#131326" Click="Author_Click" Visibility="Collapsed">
                 <Image Source="/Images/Icons/author.png"/>
             </Button>
             <TextBlock Foreground="Yellow" TextAlignment="Center" Text="!!! Аккаунт Заморожен !!!">
@@ -64,6 +44,9 @@
             </TextBlock>
             <Button Width="60" Height="60" Margin="5" ToolTip="Профиль" Click="AccountButton_Click" Background="#131326">
                 <Image Source="/Images/Icons/profile.png"/>
+            </Button>
+            <Button x:Name="LogOut_Button" Width="60" Margin="5" ToolTip="Профиль" Click="LogOutButton_Click" Background="#131326" Foreground="White">
+                Выйти
             </Button>
         </StackPanel>
         <Frame x:Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>

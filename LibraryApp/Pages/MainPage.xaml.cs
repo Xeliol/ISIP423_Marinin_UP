@@ -29,6 +29,18 @@ namespace LibraryApp.Pages
             this.DataContext = user;
 
             MainFrame.NavigationService.Navigate(new CatalogPage(false));
+
+            if (user != null)
+            {
+                if (user.RoleID == 2) AuthorButton.Visibility = Visibility.Visible;
+                else AuthorButton.Visibility = Visibility.Collapsed;
+
+                if (user.RoleID == 3) Admin.Visibility = Visibility.Visible;
+                else Admin.Visibility = Visibility.Collapsed;
+            } else
+            {
+                LogOut_Button.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void AccountButton_Click(object sender, RoutedEventArgs e)
@@ -86,6 +98,13 @@ namespace LibraryApp.Pages
         private void Admin_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.NavigationService.Navigate(new AdminPage());
+        }
+
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationData.CurrentData = null;
+
+            NavigationService.Navigate(new MainPage());
         }
     }
 }

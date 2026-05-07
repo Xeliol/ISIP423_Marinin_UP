@@ -23,7 +23,6 @@
             <TextBlock Text="{Binding Roles.Name}"></TextBlock>
             <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}"></TextBlock>
             <TextBlock Text="{Binding Email, StringFormat={}Email: {0}}"></TextBlock>
-            <Button Background="#131326" Foreground="White" Width="100" Margin="5" Click="LogOut_Click" >Выйти</Button>
         </StackPanel>
         <StackPanel Grid.Column="1" >
             <Label Content="Отзывы" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"></Label>

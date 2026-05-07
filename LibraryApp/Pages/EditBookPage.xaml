@@ -10,14 +10,17 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel Grid.ColumnSpan="3">
             <DockPanel Margin="5">
                 <TextBlock VerticalAlignment="Center">Название:</TextBlock>
                 <TextBox x:Name="Name" Text="{Binding Name}" FontSize="24" Margin="10" HorizontalAlignment="Stretch"></TextBox>
@@ -27,10 +30,42 @@
                 <TextBox x:Name="Desc" Text="{Binding Description}" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="0" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBox>
             </DockPanel>
         </StackPanel>
-        <DockPanel Margin="5" Grid.Row="1">
+        <DockPanel Margin="5" Grid.Row="1" Grid.ColumnSpan="3">
             <TextBlock VerticalAlignment="Center">Текст:</TextBlock>
             <TextBox x:Name="text" Text="{Binding Text}" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="0" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBox>
         </DockPanel>
-        <Button Grid.Row="2" Background="#131326" Foreground="White" Width="100" Margin="5" FontSize="20" Click="Button_Click">Сохранить</Button>
+
+        <ListBox x:Name="AllGenresList" Grid.Row="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center">
+            <Button x:Name="AddGenre" Width="40" Height="40" Content="+" FontSize="22" Margin="5" Foreground="White" Background="ForestGreen" Click="AddGenre_Click"></Button>
+            <Button x:Name="RemoveGenre" Width="40" Height="40" Content="-" FontSize="22" Margin="5" Foreground="White" Background="Red" Click="RemoveGenre_Click"></Button>
+        </StackPanel>
+
+        <ListBox x:Name="ChosenGenresList" Grid.Row="2" Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"></TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+
+        <Button Grid.Row="3" Background="#131326" Foreground="White" Width="110" Margin="5" FontSize="20" Click="Button_Click" Grid.ColumnSpan="3">Сохранить</Button>
     </Grid>
 </Page>

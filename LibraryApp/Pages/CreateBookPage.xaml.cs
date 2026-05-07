@@ -46,18 +46,14 @@ namespace LibraryApp.Pages
 
                 Core.Context.Books.Add(book);
 
-                Core.Context.SaveChanges();
-
-                //FICCCXX!!
-
-                Books cert_book = Core.Context.Books.First(b => b == book);
+                Core.Context.SaveChanges();   
 
                 foreach(Genres gen in ChosenGenresList.Items)
                 {
                     Core.Context.BooksGenres.Add(new BooksGenres
                     {
                         GenreID = gen.GenreID,
-                        BookID = cert_book.BookID,
+                        BookID = book.BookID,
                     });
                 }
 
@@ -83,7 +79,7 @@ namespace LibraryApp.Pages
 
         private void RemoveGenre_Click(object sender, RoutedEventArgs e)
         {
-            if (AllGenresList.SelectedItem != null)
+            if (ChosenGenresList.SelectedItem != null)
             {
                 ChosenGenresList.Items.Remove(ChosenGenresList.SelectedItem);
             }

@@ -51,14 +51,6 @@ namespace LibraryApp.Pages
             }
         }
 
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationData.CurrentData = null;
-
-            NavigationService.Navigate(new CatalogPage(true));
-
-        }
-
         private void RequestRole_Click(object sender, RoutedEventArgs e)
         {
             Users user = NavigationData.CurrentData as Users;
