@@ -23,6 +23,8 @@ namespace LibraryApp.Pages
         public CreateBookPage()
         {
             InitializeComponent();
+
+            AllGenresList.ItemsSource = Core.Context.Genres.ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -31,7 +33,7 @@ namespace LibraryApp.Pages
             {
                 Users user = NavigationData.CurrentData as Users;
 
-                Core.Context.Books.Add(new Books
+                Books book = new Books
                 {
                     Name = Name.Text,
                     Text = text.Text,
@@ -40,7 +42,25 @@ namespace LibraryApp.Pages
                     ImagePath = "/Images/Books/Placeholder.png",
                     Frozen = false,
                     Rating = 10,
-                });
+                };
+
+                Core.Context.Books.Add(book);
+
+                Core.Context.SaveChanges();
+
+                //FICCCXX!!
+
+                Books cert_book = Core.Context.Books.First(b => b == book);
+
+                foreach(Genres gen in ChosenGenresList.Items)
+                {
+                    Core.Context.BooksGenres.Add(new BooksGenres
+                    {
+                        GenreID = gen.GenreID,
+                        BookID = cert_book.BookID,
+                    });
+                }
+
                 Core.Context.SaveChanges();
                 MessageBox.Show("Книжка создана");
 
@@ -48,6 +68,29 @@ namespace LibraryApp.Pages
             }
             else MessageBox.Show("Одно из обязательных полей пустое.");
 
+        }
+
+        private void AddGenre_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllGenresList.SelectedItem != null)
+            {
+                ChosenGenresList.Items.Add(AllGenresList.SelectedItem);
+            } else
+            {
+                MessageBox.Show("Выберите жанр.");
+            }
+        }
+
+        private void RemoveGenre_Click(object sender, RoutedEventArgs e)
+        {
+            if (AllGenresList.SelectedItem != null)
+            {
+                ChosenGenresList.Items.Remove(ChosenGenresList.SelectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Выберите жанр.");
+            }
         }
     }
 }

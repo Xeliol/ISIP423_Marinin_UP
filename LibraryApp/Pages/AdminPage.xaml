@@ -23,15 +23,20 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock Text="{Binding ReportTypes.Name, StringFormat={}Тип: {0}}"></TextBlock>
-                                
+                                <TextBlock Text="{Binding Users1.Name, StringFormat={}От: {0}}"></TextBlock>
+                               
                                 <TextBlock>
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
-                                            <Setter Property="Text" Value="{Binding Books.Name}" />
-                                            <Setter Property="Visibility" Value="Visible" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding BookID}" Value="null">
-                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                <DataTrigger Binding="{Binding TypeID}" Value="1">
+                                                    <Setter Property="Text" Value="{Binding Books.Name, StringFormat={}Книга: {0}}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="2">
+                                                    <Setter Property="Text" Value="{Binding Reviews.Users.Name, StringFormat={}Нарушитель: {0}}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="3">
+                                                    <Setter Property="Text" Value="{Binding Users.Name, StringFormat={}Нарушитель: {0}}" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
@@ -41,9 +46,8 @@
                                 <Button Content="Перейти" Foreground="White" Background="#131326" Click="ReportToBook_Click">
                                     <Button.Style>
                                         <Style TargetType="Button">
-                                            <Setter Property="Visibility" Value="Visible" />
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding BookID}" Value="x:Null">
+                                                <DataTrigger Binding="{Binding TypeID}" Value="3">
                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                 </DataTrigger>
                                             </Style.Triggers>
@@ -68,6 +72,58 @@
         </StackPanel>
         <StackPanel Grid.Column="1">
             <Label Content="Заявки Заморозка" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="UnfreezeListbox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <TextBlock Text="{Binding ReportTypes.Name, StringFormat={}Тип: {0}}"></TextBlock>
+                                <TextBlock Text="{Binding Users1.Name, StringFormat={}От: {0}}"></TextBlock>
+
+                                <TextBlock>
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="1">
+                                                    <Setter Property="Text" Value="{Binding Books.Name, StringFormat={}Книга: {0}}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="2">
+                                                    <Setter Property="Text" Value="{Binding Reviews.Users.Name, StringFormat={}Нарушитель: {0}}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="3">
+                                                    <Setter Property="Text" Value="{Binding Users.Name, StringFormat={}Нарушитель: {0}}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <Button Content="Перейти" Foreground="White" Background="#131326" Click="ReportToBook_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="3">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Click="IgnoreReport_Click">Игнорировать</Button>
+                                <Button Background="Cyan" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Content="Заморозить" Click="FreezeReport_Click">
+                                </Button>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
         </StackPanel>
         <StackPanel Grid.Column="2">
             <Label Content="Заявки Автор" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>

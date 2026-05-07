@@ -29,7 +29,17 @@ namespace LibraryApp.Pages
 
         private void IgnoreReport_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                Reports rep = btn.DataContext as Reports;
 
+                rep.Solved = true;
+
+                Core.Context.SaveChanges();
+
+                ReportsListbox.ItemsSource = Core.Context.Reports.Where(r => r.Solved == false).ToList();
+            }
         }
 
         private void FreezeReport_Click(object sender, RoutedEventArgs e)

@@ -38,6 +38,17 @@ namespace LibraryApp.Pages
                 RequestRole.Visibility = Visibility.Collapsed;
             }
 
+            if (Core.Context.UnfreezeRequests.Where(ur => ur.Users.UserID == user.UserID && ur.TypeID == 3).Count() > 0)
+            {
+                RequestUnfreeze.IsEnabled = false;
+                RequestUnfreeze.Content = "Рассматриватеся...";
+            }
+
+            if (Core.Context.RoleRequests.Where(r => r.Users.UserID == user.UserID).Count() > 0)
+            {
+                RequestRole.IsEnabled = false;
+                RequestRole.Content = "Рассматриватеся...";
+            }
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
@@ -50,12 +61,34 @@ namespace LibraryApp.Pages
 
         private void RequestRole_Click(object sender, RoutedEventArgs e)
         {
+            Users user = NavigationData.CurrentData as Users;
 
+            Core.Context.RoleRequests.Add(new RoleRequests
+            {
+                UserID = user.UserID
+            });
+
+            Core.Context.SaveChanges();
+
+            RequestRole.IsEnabled = false;
+            RequestRole.Content = "Рассматриватеся...";
         }
 
         private void RequestUnfreeze_Click(object sender, RoutedEventArgs e)
         {
+            Users user = NavigationData.CurrentData as Users;
 
+            Core.Context.UnfreezeRequests.Add(new UnfreezeRequests
+            {
+                TypeID = 3,
+                UserID = user.UserID,
+                ProfileID = user.UserID,
+            });
+
+            Core.Context.SaveChanges();
+
+            RequestUnfreeze.IsEnabled = false;
+            RequestUnfreeze.Content = "Рассматриватеся...";
         }
     }
 }
