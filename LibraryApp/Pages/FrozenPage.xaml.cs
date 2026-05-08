@@ -23,6 +23,68 @@ namespace LibraryApp.Pages
         public FrozenPage()
         {
             InitializeComponent();
+
+            UsersBox.ItemsSource = Core.Context.Users.Where(u => u.Frozen == true).ToList();
+
+            ReviewListBox.ItemsSource = Core.Context.Reviews.Where(u => u.Frozen == true).ToList();
+
+            BooksListBox.ItemsSource = Core.Context.Books.Where(u => u.Frozen == true).ToList();
+        }
+        private void UnfreezeUser_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn != null)
+            {
+                Users us = btn.DataContext as Users;
+
+                if (us != null)
+                {
+                    us.Frozen = false;
+
+                    Core.Context.SaveChanges();
+
+                    UsersBox.ItemsSource = Core.Context.Users.Where(u => u.Frozen == true).ToList();
+                }
+            }
+        }
+
+        private void UnfreezeBook_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn != null)
+            {
+                Books us = btn.DataContext as Books;
+
+                if (us != null)
+                {
+                    us.Frozen = false;
+
+                    Core.Context.SaveChanges();
+
+                    BooksListBox.ItemsSource = Core.Context.Books.Where(u => u.Frozen == true).ToList();
+                }
+            }
+        }
+
+        private void UnfreezeReview_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn != null)
+            {
+                Reviews us = btn.DataContext as Reviews;
+
+                if (us != null)
+                {
+                    us.Frozen = false;
+
+                    Core.Context.SaveChanges();
+
+                    ReviewListBox.ItemsSource = Core.Context.Reviews.Where(u => u.Frozen == true).ToList();
+                }
+            }
         }
     }
 }

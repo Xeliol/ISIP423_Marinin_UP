@@ -9,57 +9,65 @@
       Title="UsersPage">
 
     <Grid Margin="40">
-        <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel.Style>
-                            <Style TargetType="StackPanel">
-                                <Setter Property="Background" Value="FloralWhite" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding Frozen}" Value="True">
-                                        <Setter Property="Background" Value="LightBlue" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Style>
-                        <Image Source="{Binding ImagePath}" Height="50"/>
-                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        <TextBlock Text="{Binding Email, StringFormat={}Email: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        <TextBlock Text="{Binding Roles.Name, StringFormat={}Роль: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
-                        <Button Background="Cyan" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Freeze_Click" Content="Заморозить">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Visibility" Value="Visible" />
+        <StackPanel>
+            <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Background" Value="FloralWhite" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Frozen}" Value="True">
-                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Setter Property="Background" Value="LightBlue" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
-                            </Button.Style>
-                        </Button>
-                        <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Unfreeze_Click" Content="Разморозить">
-                            <Button.Style>
-                                <Style TargetType="Button">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Frozen}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+                            </StackPanel.Style>
+                            <Image Source="{Binding ImagePath}" Height="50"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <TextBox Text="{Binding Password}" VerticalAlignment="Center" Margin="5"></TextBox>
+                            <TextBlock Text="{Binding Email, StringFormat={}Email: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <TextBlock Text="{Binding Roles.Name, StringFormat={}Роль: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <StackPanel VerticalAlignment="Center">
+                                <Button Width="20" Click="Up_Click" VerticalContentAlignment="Center">▲</Button>
+                                <Button Width="20" Click="Down_Click" VerticalContentAlignment="Center">▼</Button>
+                            </StackPanel>
+                            <Button Background="Cyan" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Freeze_Click" Content="Заморозить">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Unfreeze_Click" Content="Разморозить">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button Margin="20" Content="Сохранить" Background="#131326" Foreground="White" Width="100" VerticalAlignment="Bottom" Click="Save_Click"></Button>
+        </StackPanel>
     </Grid>
 </Page>

@@ -9,6 +9,84 @@
       Title="FrozenPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Label Content="Пользователи" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                                <Image Source="{Binding ImagePath}" Height="50"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Text="{Binding Roles.Name, StringFormat={}Роль: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            </StackPanel>
+                            <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="UnfreezeUser_Click" Content="Разморозить"></Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <Label Content="Книги" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="BooksListBox" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                                <Image Source="{Binding ImagePath}" Height="50"/>
+                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBlock Text="{Binding Users.Name, StringFormat={}Автор: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            </StackPanel>
+                            <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="UnfreezeBook_Click" Content="Разморозить"></Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2">
+            <Label Content="Жалобы" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="ReviewListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Background="LightBlue">
+                            <TextBlock Text="{Binding Books.Name}" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="{Binding Books.Users.Name}" FontSize="10"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                    <Image Source="{Binding Users.ImagePath}" Width="50"/>
+                                    <TextBlock Text="{Binding Users.Name}"></TextBlock>
+                                    <TextBlock FontWeight="Bold" Text="{Binding Rating, StringFormat={}{0}/10}"></TextBlock>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
+                            </StackPanel>
+                            <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="UnfreezeReview_Click" Content="Разморозить"></Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </StackPanel>
     </Grid>
 </Page>

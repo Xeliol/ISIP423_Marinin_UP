@@ -95,6 +95,12 @@ namespace LibraryApp.Pages
 
         private void FreezeButton_Click(object sender, RoutedEventArgs e)
         {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.IsEnabled = false;
+                btn.Content = "Заморожено";
+            }
             book.Frozen = true;
             Core.Context.SaveChanges();
         }
@@ -114,67 +120,80 @@ namespace LibraryApp.Pages
 
         private void BookReport_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn != null && Core.Context.Reports.Where(r => r.TypeID == 1 && r.BookID == book.BookID && r.SenderID == user.UserID && r.Solved == false).Count() == 0)
+            if (user != null)
             {
-                btn.IsEnabled = false;
-                btn.Background = Brushes.Gray;
-                btn.Content = "Жалоба подана";
-
-                Core.Context.Reports.Add(new Reports
+                Button btn = sender as Button;
+                if (btn != null && Core.Context.Reports.Where(r => r.TypeID == 1 && r.BookID == book.BookID && r.SenderID == user.UserID && r.Solved == false).Count() == 0)
                 {
-                    BookID = book.BookID,
-                    TypeID = 1,
-                    Solved = false,
-                    SenderID = user.UserID
-                });
-                Core.Context.SaveChanges();
-            } else
-            {
-                MessageBox.Show("Вы уже подали такую жалобу.");
+                    btn.IsEnabled = false;
+                    btn.Background = Brushes.Gray;
+                    btn.Content = "Жалоба подана";
+
+                    Core.Context.Reports.Add(new Reports
+                    {
+                        BookID = book.BookID,
+                        TypeID = 1,
+                        Solved = false,
+                        SenderID = user.UserID
+                    });
+                    Core.Context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Вы уже подали такую жалобу.");
+                }
             }
+            else MessageBox.Show("Незарегистрированные пользователи не могут подавать жалобы.");
         }
 
         private void AuthorReport_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn != null)
+            if (user != null)
             {
-                btn.IsEnabled = false;
-                btn.Background = Brushes.Gray;
-                btn.Content = "Жалоба подана";
-
-                Core.Context.Reports.Add(new Reports
+                Button btn = sender as Button;
+                if (btn != null)
                 {
-                    UserID = book.Users.UserID,
-                    TypeID = 3,
-                    Solved = false,
-                    SenderID = user.UserID
-                });
-                Core.Context.SaveChanges();
+                    btn.IsEnabled = false;
+                    btn.Background = Brushes.Gray;
+                    btn.Content = "Жалоба подана";
+
+                    Core.Context.Reports.Add(new Reports
+                    {
+                        UserID = book.Users.UserID,
+                        TypeID = 3,
+                        Solved = false,
+                        SenderID = user.UserID
+                    });
+                    Core.Context.SaveChanges();
+                }
             }
+            else MessageBox.Show("Незарегистрированные пользователи не могут подавать жалобы.");
         }
 
         private void ReviewReport_Click(object sender, RoutedEventArgs e)
         {
-            Button btn = sender as Button;
-            if (btn != null)
+            if (user != null)
             {
-                btn.IsEnabled = false;
-                btn.Background = Brushes.Gray;
-                btn.Content = "Жалоба подана";
-
-                Reviews rev = btn.DataContext as Reviews;
-
-                Core.Context.Reports.Add(new Reports
+                Button btn = sender as Button;
+                if (btn != null)
                 {
-                    ReviewID = rev.ReviewID,
-                    TypeID = 2,
-                    Solved = false,
-                    SenderID = user.UserID
-                });
-                Core.Context.SaveChanges();
+                    btn.IsEnabled = false;
+                    btn.Background = Brushes.Gray;
+                    btn.Content = "Жалоба подана";
+
+                    Reviews rev = btn.DataContext as Reviews;
+
+                    Core.Context.Reports.Add(new Reports
+                    {
+                        ReviewID = rev.ReviewID,
+                        TypeID = 2,
+                        Solved = false,
+                        SenderID = user.UserID
+                    });
+                    Core.Context.SaveChanges();
+                }
             }
+            else MessageBox.Show("Незарегистрированные пользователи не могут подавать жалобы.");
         }
     }
 }
