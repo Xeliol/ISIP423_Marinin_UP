@@ -92,7 +92,10 @@ namespace LibraryApp.Pages
 
         private void Author_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new AuthorPage());
+            Users user = NavigationData.CurrentData as Users;
+
+            if (user.Frozen == false) MainFrame.NavigationService.Navigate(new AuthorPage());
+            else MessageBox.Show("Ваш аккаунт заморожен. Оспорить заморозку можно на вкладке Профиль.");
         }
 
         private void Admin_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,65 @@
+﻿<Page x:Class="LibraryApp.Pages.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LibraryApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPage">
+
+    <Grid Margin="40">
+        <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Setter Property="Background" Value="FloralWhite" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                        <Setter Property="Background" Value="LightBlue" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <Image Source="{Binding ImagePath}" Height="50"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        <TextBlock Text="{Binding Email, StringFormat={}Email: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        <TextBlock Text="{Binding Roles.Name, StringFormat={}Роль: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
+                        <Button Background="Cyan" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Freeze_Click" Content="Заморозить">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Background="Blue" Foreground="White" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="Unfreeze_Click" Content="Разморозить">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+    </Grid>
+</Page>

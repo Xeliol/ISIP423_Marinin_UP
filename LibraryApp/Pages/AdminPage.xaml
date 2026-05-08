@@ -69,7 +69,6 @@
                                     </Button.Style>
                                 </Button>
                             </StackPanel>
-                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -123,7 +122,6 @@
                                 <Button Background="Orange" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Content="Разморозить" Click="Unfreeze_Click">
                                 </Button>
                             </StackPanel>
-                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -145,7 +143,6 @@
                                 <Button Background="ForestGreen" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="GiveRole_Click">Выдать</Button>
                                 <Button Background="Red" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Content="Отказать" Click="RefuseRole_Click"></Button>
                             </StackPanel>
-                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -157,8 +154,8 @@
             </ListBox>
         </StackPanel>
         <StackPanel Grid.Column="3" VerticalAlignment="Center">
-            <Button Content="Замороженное" FontSize="20" Margin="20" Background="Cyan"></Button>
-            <Button Content="Пользователи" FontSize="20" Margin="20"></Button>
+            <Button Content="Замороженное" FontSize="20" Margin="20" Background="Cyan" Click="Button_Click_1"></Button>
+            <Button Content="Пользователи" FontSize="20" Margin="20" Click="Button_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>
