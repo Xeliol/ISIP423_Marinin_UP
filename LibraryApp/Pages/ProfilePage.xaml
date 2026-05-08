@@ -26,10 +26,20 @@
         </StackPanel>
         <StackPanel Grid.Column="1" >
             <Label Content="Отзывы" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-            <ListBox x:Name="ReviewsListbox" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="FloralWhite">
+            <ListBox x:Name="ReviewsListbox" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
+                            <StackPanel.Style>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Background" Value="FloralWhite" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                            <Setter Property="Background" Value="LightBlue" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </StackPanel.Style>
                             <TextBlock Text="{Binding Books.Name}" FontWeight="Bold"></TextBlock>
                             <TextBlock Text="{Binding Books.Users.Name}" FontSize="10"></TextBlock>
                             <StackPanel Orientation="Horizontal">
@@ -40,6 +50,18 @@
                                 </StackPanel>
                                 <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
                             </StackPanel>
+                            <Button Background="Blue" Foreground="White" Width="120" Margin="5" Click="RequestReviewUnfreeze_Click" Content="Оспорить заморозку">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Frozen}" Value="True">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

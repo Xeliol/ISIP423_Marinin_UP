@@ -95,12 +95,8 @@ namespace LibraryApp.Pages
 
         private void FreezeButton_Click(object sender, RoutedEventArgs e)
         {
-            Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
-            if (cur_book != null)
-            {
-                cur_book.Frozen = true;
-                Core.Context.SaveChanges();
-            }
+            book.Frozen = true;
+            Core.Context.SaveChanges();
         }
 
         private void ReviewFreeze_Click(object sender, RoutedEventArgs e)
@@ -119,7 +115,7 @@ namespace LibraryApp.Pages
         private void BookReport_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            if (btn != null)
+            if (btn != null && Core.Context.Reports.Where(r => r.TypeID == 1 && r.BookID == book.BookID && r.SenderID == user.UserID && r.Solved == false).Count() == 0)
             {
                 btn.IsEnabled = false;
                 btn.Background = Brushes.Gray;
@@ -133,6 +129,9 @@ namespace LibraryApp.Pages
                     SenderID = user.UserID
                 });
                 Core.Context.SaveChanges();
+            } else
+            {
+                MessageBox.Show("Вы уже подали такую жалобу.");
             }
         }
 

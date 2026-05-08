@@ -43,7 +43,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
 
-                                <Button Content="Перейти" Foreground="White" Background="#131326" Click="ReportToBook_Click">
+                                <Button Content="Перейти" Foreground="White" Background="#131326" Click="ReportToBook_Click" HorizontalAlignment="Center">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Style.Triggers>
@@ -55,8 +55,18 @@
                                     </Button.Style>
                                 </Button>
 
-                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Click="IgnoreReport_Click">Игнорировать</Button>
-                                <Button Background="Cyan" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Content="Заморозить" Click="FreezeReport_Click">
+                                <Button Background="Yellow" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="IgnoreReport_Click">Игнорировать</Button>
+                                <Button Background="Cyan" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Content="Заморозить" Click="FreezeReport_Click"/>
+                                <Button Background="DodgerBlue" HorizontalAlignment="Center" Width="200" Height="20" Margin="5" Content="Заморозить с пользователем" Click="FreezeWithUser_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TypeID}" Value="3">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
                                 </Button>
                             </StackPanel>
                             <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
@@ -78,7 +88,7 @@
                         <StackPanel Orientation="Horizontal">
                             <StackPanel>
                                 <TextBlock Text="{Binding ReportTypes.Name, StringFormat={}Тип: {0}}"></TextBlock>
-                                <TextBlock Text="{Binding Users1.Name, StringFormat={}От: {0}}"></TextBlock>
+                                <TextBlock Text="{Binding Users.Name, StringFormat={}От: {0}}"></TextBlock>
 
                                 <TextBlock>
                                     <TextBlock.Style>
@@ -88,7 +98,7 @@
                                                     <Setter Property="Text" Value="{Binding Books.Name, StringFormat={}Книга: {0}}" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding TypeID}" Value="2">
-                                                    <Setter Property="Text" Value="{Binding Reviews.Users.Name, StringFormat={}Нарушитель: {0}}" />
+                                                    <Setter Property="Text" Value="{Binding Reviews.Users1.Name, StringFormat={}Нарушитель: {0}}" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding TypeID}" Value="3">
                                                     <Setter Property="Text" Value="{Binding Users.Name, StringFormat={}Нарушитель: {0}}" />
@@ -98,7 +108,7 @@
                                     </TextBlock.Style>
                                 </TextBlock>
 
-                                <Button Content="Перейти" Foreground="White" Background="#131326" Click="ReportToBook_Click">
+                                <Button Content="Перейти" Foreground="White" Background="#131326" Click="RequestToBook_Click" HorizontalAlignment="Center">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Style.Triggers>
@@ -109,9 +119,8 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-
-                                <Button Background="Yellow" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Click="IgnoreReport_Click">Игнорировать</Button>
-                                <Button Background="Cyan" HorizontalAlignment="Right" Width="100" Height="20" Margin="5" Content="Заморозить" Click="FreezeReport_Click">
+                                <Button Background="Red" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="IgnoreUnfreeze_Click">Игнорировать</Button>
+                                <Button Background="Orange" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Content="Разморозить" Click="Unfreeze_Click">
                                 </Button>
                             </StackPanel>
                             <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
@@ -127,6 +136,25 @@
         </StackPanel>
         <StackPanel Grid.Column="2">
             <Label Content="Заявки Автор" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="RoleBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Users.Name, StringFormat={}От: {0}}"></TextBlock>
+                                <Button Background="ForestGreen" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Click="GiveRole_Click">Выдать</Button>
+                                <Button Background="Red" HorizontalAlignment="Center" Width="100" Height="20" Margin="5" Content="Отказать" Click="RefuseRole_Click"></Button>
+                            </StackPanel>
+                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
         </StackPanel>
         <StackPanel Grid.Column="3" VerticalAlignment="Center">
             <Button Content="Замороженное" FontSize="20" Margin="20" Background="Cyan"></Button>

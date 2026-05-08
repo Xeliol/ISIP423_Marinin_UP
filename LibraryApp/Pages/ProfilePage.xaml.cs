@@ -42,12 +42,14 @@ namespace LibraryApp.Pages
             {
                 RequestUnfreeze.IsEnabled = false;
                 RequestUnfreeze.Content = "Рассматриватеся...";
+                RequestUnfreeze.Foreground = Brushes.Black;
             }
 
             if (Core.Context.RoleRequests.Where(r => r.Users.UserID == user.UserID).Count() > 0)
             {
                 RequestRole.IsEnabled = false;
                 RequestRole.Content = "Рассматриватеся...";
+                RequestRole.Foreground = Brushes.Black;
             }
         }
 
@@ -55,32 +57,75 @@ namespace LibraryApp.Pages
         {
             Users user = NavigationData.CurrentData as Users;
 
-            Core.Context.RoleRequests.Add(new RoleRequests
+            if (Core.Context.RoleRequests.Where(u => u.UserID == user.UserID).Count() == 0)
             {
-                UserID = user.UserID
-            });
+                Core.Context.RoleRequests.Add(new RoleRequests
+                {
+                    UserID = user.UserID
+                });
 
-            Core.Context.SaveChanges();
+                Core.Context.SaveChanges();
 
-            RequestRole.IsEnabled = false;
-            RequestRole.Content = "Рассматриватеся...";
+                RequestRole.IsEnabled = false;
+                RequestRole.Content = "Рассматриватеся...";
+                RequestRole.Foreground = Brushes.Black;
+            }
+            else
+            {
+                MessageBox.Show("На рассмотрении.");
+            }
         }
 
         private void RequestUnfreeze_Click(object sender, RoutedEventArgs e)
         {
             Users user = NavigationData.CurrentData as Users;
 
-            Core.Context.UnfreezeRequests.Add(new UnfreezeRequests
+            if (Core.Context.UnfreezeRequests.Where(u => u.ProfileID == user.UserID && u.TypeID == 3).Count() == 0)
             {
-                TypeID = 3,
-                UserID = user.UserID,
-                ProfileID = user.UserID,
-            });
+                Core.Context.UnfreezeRequests.Add(new UnfreezeRequests
+                {
+                    TypeID = 3,
+                    UserID = user.UserID,
+                    ProfileID = user.UserID,
+                });
 
-            Core.Context.SaveChanges();
+                Core.Context.SaveChanges();
 
-            RequestUnfreeze.IsEnabled = false;
-            RequestUnfreeze.Content = "Рассматриватеся...";
+                RequestUnfreeze.IsEnabled = false;
+                RequestUnfreeze.Content = "Рассматриватеся...";
+                RequestUnfreeze.Foreground = Brushes.Black;
+            }
+            else
+            {
+                MessageBox.Show("Оспорение на рассмотрении.");
+            }
+        }
+
+        private void RequestReviewUnfreeze_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                Reviews rev = btn.DataContext as Reviews;
+
+                Users user = NavigationData.CurrentData as Users;
+                
+                if(Core.Context.UnfreezeRequests.Where(u => u.ReviewID == rev.ReviewID && u.TypeID == 2).Count() == 0)
+                {
+                    Core.Context.UnfreezeRequests.Add(new UnfreezeRequests
+                    {
+                        TypeID = 2,
+                        UserID = user.UserID,
+                        ReviewID = rev.ReviewID,
+                    });
+
+                    Core.Context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Оспорение на рассмотрении.");
+                }
+            }
         }
     }
 }
