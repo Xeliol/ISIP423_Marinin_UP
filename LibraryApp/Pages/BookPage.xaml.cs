@@ -55,7 +55,7 @@ namespace LibraryApp.Pages
         {
             if (user != null)
             {
-                if (ReviewTextBox.Text != "")
+                if (ReviewTextBox.Text != "" && Core.Context.Reviews.Where(r => r.UserID == user.UserID && r.BookID == book.BookID).Count() == 0)
                 {
                     if(rating != -1)
                     {
@@ -72,14 +72,14 @@ namespace LibraryApp.Pages
                         Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
                         if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Count() > 0)
                         {
-                            cur_book.Rating = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Select(r => r.Rating).Average();
+                            cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
                             Core.Context.SaveChanges();
                         }
                         ReviewsListbox.ItemsSource = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).ToList();
                     }
                     else MessageBox.Show("Выберите оценку.");
                 }
-                else MessageBox.Show("Отзыв пуст.");
+                else MessageBox.Show("Отзыв пуст или вы его уже оставили.");
             }
             else MessageBox.Show("Надо войти в аккаунт, чтобы оставить отзыв.");
         }

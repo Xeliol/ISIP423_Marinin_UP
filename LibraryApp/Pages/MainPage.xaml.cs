@@ -28,7 +28,7 @@ namespace LibraryApp.Pages
 
             this.DataContext = user;
 
-            MainFrame.NavigationService.Navigate(new CatalogPage(false));
+            MainFrame.NavigationService.Navigate(new CatalogPage());
 
             if (user != null)
             {

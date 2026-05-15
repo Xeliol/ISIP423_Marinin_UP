@@ -24,14 +24,9 @@ namespace LibraryApp.Pages
         int SortRating = 0;
         int SortName = 0;
 
-        public CatalogPage(bool erase_history = false)
+        public CatalogPage()
         {
             InitializeComponent();
-
-            if (erase_history)
-            {
-                this.Loaded += (s, e) => EraseHistory();
-            }
 
             Users user = NavigationData.CurrentData as Users;
 

@@ -27,10 +27,10 @@ namespace LibraryApp.Pages
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            bool auth = Auth(LoginBox.Text, PassBox.Text);
+            bool auth = Auth(LoginBox.Text, PassBox.Password);
             if (auth)
             {
-                Users log_user = Core.Context.Users.ToList().Where(p => p.Login == LoginBox.Text).Where(p => p.Password == PassBox.Text).First();
+                Users log_user = Core.Context.Users.ToList().Where(p => p.Login == LoginBox.Text).Where(p => p.Password == PassBox.Password).First();
                 NavigationData.CurrentData = log_user;
 
                 MessageBox.Show("Logged in!");

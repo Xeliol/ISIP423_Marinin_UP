@@ -38,7 +38,7 @@ namespace LibraryApp.Pages
         private bool isPassWrong(String pass)
         {
             bool flag = true;
-            if (PassBox1.Text.Length < 8) flag = false;
+            if (PassBox1.Password.Length < 8) flag = false;
             else
             {
                 flag = pass.Any(char.IsDigit);
@@ -71,14 +71,14 @@ namespace LibraryApp.Pages
 
         private void SignupButton_Click(object sender, RoutedEventArgs e)
         {
-            var signup = SignUp(LoginBox.Text, PassBox1.Text, PassBox2.Text, NameBox.Text, EmailBox.Text);
+            var signup = SignUp(LoginBox.Text, PassBox1.Password, PassBox2.Password, NameBox.Text, EmailBox.Text);
             if (signup)
             {
                 Users new_user = new Users
                 {
                     UserID = Core.Context.Users.ToList().Count() + 1,
                     Login = LoginBox.Text,
-                    Password = PassBox1.Text,
+                    Password = PassBox1.Password,
                     ImagePath = "/Images/Users/Placeholder.jpg",
                     Name = NameBox.Text,
                     RoleID = 1,

@@ -17,12 +17,12 @@
             </StackPanel>
             <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock FontSize="18" Text="Password: " HorizontalAlignment="Center"/>
-                <TextBox x:Name="PassBox1" Width="200"></TextBox>
+                <PasswordBox x:Name="PassBox1" Width="200"></PasswordBox>
             </StackPanel>
             <TextBlock FontSize="10" Text="Password MUST be at least 8 characters long, inlcude numbers and letters" HorizontalAlignment="Center"/>
             <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock FontSize="18" Text="Confirm Password: " HorizontalAlignment="Center"/>
-                <TextBox x:Name="PassBox2" Width="200"></TextBox>
+                <PasswordBox x:Name="PassBox2" Width="200"></PasswordBox>
             </StackPanel>
             <StackPanel Margin="0 10" Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock FontSize="18" Text="Name: " HorizontalAlignment="Center"/>

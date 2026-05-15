@@ -38,6 +38,11 @@ namespace LibraryApp.Pages
                 RequestRole.Visibility = Visibility.Collapsed;
             }
 
+            if(user.RoleID != 1)
+            {
+                RequestRole.Visibility = Visibility.Collapsed;
+            }
+
             if (Core.Context.UnfreezeRequests.Where(ur => ur.Users.UserID == user.UserID && ur.TypeID == 3).Count() > 0)
             {
                 RequestUnfreeze.IsEnabled = false;

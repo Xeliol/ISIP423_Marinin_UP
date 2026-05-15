@@ -41,7 +41,7 @@ namespace LibraryApp.Pages
                     AuthorID = user.UserID,
                     ImagePath = "/Images/Books/Placeholder.png",
                     Frozen = false,
-                    Rating = 10,
+                    Rating = 0,
                 };
 
                 Core.Context.Books.Add(book);

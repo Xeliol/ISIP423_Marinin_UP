@@ -28,7 +28,7 @@ namespace LibraryApp.Pages
 
             user = NavigationData.CurrentData as Users;
 
-            ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
+            ListsTab.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
+                        ListsTab.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -118,7 +118,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
+                        ListsTab.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -161,7 +161,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
+                        ListsTab.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
@@ -204,7 +204,7 @@ namespace LibraryApp.Pages
                             ListID = idList
                         });
                         Core.Context.SaveChanges();
-                        ListsListBox.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
+                        ListsTab.ItemsSource = Core.Context.Lists.Where(l => l.UserID == user.UserID).ToList();
                     }
                     else
                     {
