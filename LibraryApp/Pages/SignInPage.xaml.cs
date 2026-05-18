@@ -33,7 +33,7 @@ namespace LibraryApp.Pages
                 Users log_user = Core.Context.Users.ToList().Where(p => p.Login == LoginBox.Text).Where(p => p.Password == PassBox.Password).First();
                 NavigationData.CurrentData = log_user;
 
-                MessageBox.Show("Logged in!");
+                MessageBox.Show("Вход выполнен!");
                 NavigationService.Navigate(new MainPage());
             }
         }
@@ -61,13 +61,13 @@ namespace LibraryApp.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Wrong Password.");
+                    MessageBox.Show("Неверный пароль.");
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("No such user.");
+                MessageBox.Show("Пользователя не существует.");
                 return false;
             }
         }

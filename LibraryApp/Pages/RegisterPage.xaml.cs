@@ -98,7 +98,7 @@ namespace LibraryApp.Pages
 
                 NavigationData.CurrentData = new_user;
 
-                MessageBox.Show("Account created!");
+                MessageBox.Show("Аккаунт создан!");
                 NavigationService.Navigate(new MainPage());
             }
         }
@@ -117,14 +117,14 @@ namespace LibraryApp.Pages
             {
                 if (people.Contains(login))
                 {
-                    MessageBox.Show("Username is already in use.");
+                    MessageBox.Show("Логин уже используется.");
                     return false;
                 }
                 else
                 {
                     if (pass1 != pass2)
                     {
-                        MessageBox.Show("Passwords do not match.");
+                        MessageBox.Show("Пароли не совпадают.");
                         return false;
                     }
                     else
@@ -138,19 +138,27 @@ namespace LibraryApp.Pages
                         }
                         if (!flag)
                         {
-                            MessageBox.Show("Password does not follow the rules.");
+                            MessageBox.Show("Пароль не следует правилам.");
                             return false;
                         }   
                         else
                         {
-                            return true;
+                            if (IsValidEmailRegex(EmailBox.Text))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Введите настоящий Email.");
+                                return false;
+                            }
                         }
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Please fill every field.");
+                MessageBox.Show("Заполните все поля.");
                 return false;
             }
         }

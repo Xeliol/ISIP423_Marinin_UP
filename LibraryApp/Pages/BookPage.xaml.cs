@@ -55,31 +55,38 @@ namespace LibraryApp.Pages
         {
             if (user != null)
             {
-                if (ReviewTextBox.Text != "" && Core.Context.Reviews.Where(r => r.UserID == user.UserID && r.BookID == book.BookID).Count() == 0)
+                if (ReviewTextBox.Text != "")
                 {
-                    if(rating != -1)
-                    {
-                        Core.Context.Reviews.Add(new Reviews
+                    if (user.UserID != book.Users.UserID) {
+                        if (Core.Context.Reviews.Where(r => r.UserID == user.UserID && r.BookID == book.BookID).Count() == 0)
                         {
-                            BookID = book.BookID,
-                            UserID = user.UserID,
-                            Frozen = false,
-                            Text = ReviewTextBox.Text,
-                            Rating = rating
-                        });
-                        Core.Context.SaveChanges();
+                            if (rating != -1)
+                            {
+                                Core.Context.Reviews.Add(new Reviews
+                                {
+                                    BookID = book.BookID,
+                                    UserID = user.UserID,
+                                    Frozen = false,
+                                    Text = ReviewTextBox.Text,
+                                    Rating = rating
+                                });
+                                Core.Context.SaveChanges();
 
-                        Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
-                        if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Count() > 0)
-                        {
-                            cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
-                            Core.Context.SaveChanges();
+                                Books cur_book = Core.Context.Books.First(b => b.BookID == book.BookID);
+                                if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Count() > 0)
+                                {
+                                    cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
+                                    Core.Context.SaveChanges();
+                                }
+                                ReviewsListbox.ItemsSource = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).ToList();
+                            }
+                            else MessageBox.Show("Выберите оценку.");
                         }
-                        ReviewsListbox.ItemsSource = Core.Context.Reviews.Where(r => r.BookID == book.BookID && r.Frozen == false).ToList();
+                        else MessageBox.Show("Вы уже оставили отзыв.");
                     }
-                    else MessageBox.Show("Выберите оценку.");
+                    else MessageBox.Show("Нельзя оставить отзыв своей книге.");
                 }
-                else MessageBox.Show("Отзыв пуст или вы его уже оставили.");
+                else MessageBox.Show("Отзыв пуст.");
             }
             else MessageBox.Show("Надо войти в аккаунт, чтобы оставить отзыв.");
         }
