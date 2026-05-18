@@ -17,6 +17,8 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="24"></TextBlock>
-        <TextBlock Grid.Row="1" Text="{Binding Text}" TextWrapping="Wrap" Grid.Column="0" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBlock>
+        <ScrollViewer Grid.Row="1">
+            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Grid.Column="0" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True"></TextBlock>
+        </ScrollViewer>
     </Grid>
 </Page>
