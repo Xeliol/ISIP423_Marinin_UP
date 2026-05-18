@@ -66,22 +66,6 @@ namespace LibraryApp.Pages
 
             if (user != null)
             {
-                if (Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
-                {
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        Core.Context.Lists.Add(new Lists
-                        {
-                            UserID = user.UserID,
-                            TypeID = i
-                        });
-                        Core.Context.SaveChanges();
-                    }
-                }
-            }
-
-            if (user != null)
-            {
                 MainFrame.NavigationService.Navigate(new BookListsPage());
             }
             else

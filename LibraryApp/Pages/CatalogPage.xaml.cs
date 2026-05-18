@@ -34,7 +34,7 @@ namespace LibraryApp.Pages
 
             List<string> GenreSorts = Core.Context.Genres.Select(pt => pt.Name).ToList();
 
-            GenreSorts.Insert(0, "None");
+            GenreSorts.Insert(0, "—");
 
             GenreSortBox.ItemsSource = GenreSorts;
 
@@ -117,27 +117,6 @@ namespace LibraryApp.Pages
             }
         }
 
-        private void CreateLists()
-        {
-            Users user = NavigationData.CurrentData as Users;
-
-            if (user != null)
-            {
-                if (Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
-                {
-                    for (int i = 1; i <= 4; i++)
-                    {
-                        Core.Context.Lists.Add(new Lists
-                        {
-                            UserID = user.UserID,
-                            TypeID = i
-                        });
-                        Core.Context.SaveChanges();
-                    }
-                }
-            }
-        }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             SortBooks();
@@ -181,13 +160,13 @@ namespace LibraryApp.Pages
             {
                 SortName = 1;
                 SortRating = 0;
-                NameSort.Content = "Name🔽";
+                NameSort.Content = "Имя🔽";
             }
             else if (SortName == 1)
             {
                 SortName= 2;
                 SortRating = 0;
-                NameSort.Content = "Name🔼";
+                NameSort.Content = "Имя🔼";
             }
             SortBooks();
         }
@@ -198,13 +177,13 @@ namespace LibraryApp.Pages
             {
                 SortRating = 1;
                 SortName = 0;
-                RatingSort.Content = "Rating🔽";
+                RatingSort.Content = "Рейтинг🔽";
             }
             else if (SortRating == 1)
             {
                 SortRating = 2;
                 SortName = 0;
-                RatingSort.Content = "Rating🔼";
+                RatingSort.Content = "Рейтинг🔼";
             }
             SortBooks();
         }

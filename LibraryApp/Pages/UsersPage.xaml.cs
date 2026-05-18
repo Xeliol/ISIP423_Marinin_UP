@@ -78,7 +78,7 @@ namespace LibraryApp.Pages
             {
                 Users us = btn.DataContext as Users;
 
-                if (us != null)
+                if (us != null && us.Login != "admin")
                 {
                     if(us.RoleID != 3)
                     {
@@ -91,6 +91,10 @@ namespace LibraryApp.Pages
                         MessageBox.Show("Максимальная роль");
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Нельзя менять роль админа.");
+                }
             }
         }
 
@@ -102,7 +106,7 @@ namespace LibraryApp.Pages
             {
                 Users us = btn.DataContext as Users;
 
-                if (us != null)
+                if (us != null && us.Login != "admin")
                 {
                     if (us.RoleID != 1)
                     {
@@ -114,6 +118,10 @@ namespace LibraryApp.Pages
                     {
                         MessageBox.Show("Минимальная роль");
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Нельзя менять роль админа.");
                 }
             }
         }

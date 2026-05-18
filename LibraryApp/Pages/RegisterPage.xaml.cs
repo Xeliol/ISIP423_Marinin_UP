@@ -38,7 +38,6 @@ namespace LibraryApp.Pages
         /// <summary>
         /// Проверяет, соответствует ли пароль требованиям: длина >= 8, содержит буквы и цифры.
         /// </summary>
-
         private bool isPassWrong(String pass)
         {
             bool flag = true;
@@ -97,6 +96,8 @@ namespace LibraryApp.Pages
                 Core.Context.SaveChanges();
 
                 NavigationData.CurrentData = new_user;
+
+                CreateLists();
 
                 MessageBox.Show("Аккаунт создан!");
                 NavigationService.Navigate(new MainPage());
@@ -160,6 +161,30 @@ namespace LibraryApp.Pages
             {
                 MessageBox.Show("Заполните все поля.");
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Создаёт списки в БД для использования пользователем.
+        /// </summary>
+        private void CreateLists()
+        {
+            Users user = NavigationData.CurrentData as Users;
+
+            if (user != null)
+            {
+                if (Core.Context.Lists.Where(l => l.UserID == user.UserID).Count() == 0)
+                {
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        Core.Context.Lists.Add(new Lists
+                        {
+                            UserID = user.UserID,
+                            TypeID = i
+                        });
+                    }
+                    Core.Context.SaveChanges();
+                }
             }
         }
     }
