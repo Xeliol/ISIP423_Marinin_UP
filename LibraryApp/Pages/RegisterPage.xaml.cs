@@ -35,6 +35,10 @@ namespace LibraryApp.Pages
         List<String> people = new List<String>();
         List<String> nums = new List<String> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "0" };
 
+        /// <summary>
+        /// Проверяет, соответствует ли пароль требованиям: длина >= 8, содержит буквы и цифры.
+        /// </summary>
+
         private bool isPassWrong(String pass)
         {
             bool flag = true;

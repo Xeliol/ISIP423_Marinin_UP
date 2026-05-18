@@ -29,6 +29,9 @@ namespace LibraryApp.Pages
             BooksListBox.ItemsSource = Core.Context.Books.Where(b => b.AuthorID == user.UserID).ToList();
         }
 
+        /// <summary>
+        /// Логика взаимодействия с кнопкой запроса разморозки книги
+        /// </summary>
         private void RequestUnfreeze_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;

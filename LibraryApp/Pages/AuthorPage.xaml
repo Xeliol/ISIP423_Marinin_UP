@@ -19,7 +19,7 @@
         <ListBox x:Name="BooksListBox" Grid.Column="0" BorderThickness="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="White">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Height="450" Width="250">
+                    <StackPanel Width="250">
                         <StackPanel.Style>
                             <Style TargetType="StackPanel">
                                 <Setter Property="Background" Value="White" />

@@ -42,21 +42,6 @@ namespace LibraryApp.Pages
 
         }
 
-        private void EraseHistory()
-        {
-            while (NavigationService.CanGoBack)
-            {
-                try
-                {
-                    NavigationService.RemoveBackEntry();
-                }
-                catch (Exception ex)
-                {
-                    break;
-                }
-            }
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
@@ -73,153 +58,44 @@ namespace LibraryApp.Pages
 
         private void ReadingClick(object sender, RoutedEventArgs e)
         {
-            CreateLists();
-
-            Button btn = sender as Button;
-
-            if (btn != null)
-            {
-                Books book = btn.DataContext as Books;
-
-                Users user = NavigationData.CurrentData as Users;
-
-                if (user != null && book != null)
-                {
-                    if(Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
-                    {
-                        BooksLists existing_booklist = Core.Context.BooksLists.First(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID);
-                        Core.Context.BooksLists.Remove(existing_booklist);
-                        Core.Context.SaveChanges();
-                    }
-
-                    int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 3).ListID;
-
-                    if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
-                    {
-                        Core.Context.BooksLists.Add(new BooksLists{
-                            BookID = book.BookID,
-                            ListID = idList
-                        });
-                        Core.Context.SaveChanges();
-                    } else
-                    {
-                        MessageBox.Show("Уже в списке.");
-                    }
-                } else
-                {
-                    MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
-                }
-            }
+            ChangeLists(sender, 3);
         }
 
         private void LaterClick(object sender, RoutedEventArgs e)
         {
-            CreateLists();
-
-            Button btn = sender as Button;
-
-            if (btn != null)
-            {
-                Books book = btn.DataContext as Books;
-
-                Users user = NavigationData.CurrentData as Users;
-
-                if (user != null && book != null)
-                {
-                    if (Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
-                    {
-                        BooksLists existing_booklist = Core.Context.BooksLists.First(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID);
-                        Core.Context.BooksLists.Remove(existing_booklist);
-                        Core.Context.SaveChanges();
-                    }
-
-                    int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 2).ListID;
-                    if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
-                    {
-                        Core.Context.BooksLists.Add(new BooksLists
-                        {
-                            BookID = book.BookID,
-                            ListID = idList
-                        });
-                        Core.Context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Уже в списке.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
-                }
-            }
+            ChangeLists(sender, 2);
         }
 
         private void FinishedClick(object sender, RoutedEventArgs e)
         {
-            CreateLists();
-
-            Button btn = sender as Button;
-
-            if (btn != null)
-            {
-                Books book = btn.DataContext as Books;
-
-                Users user = NavigationData.CurrentData as Users;
-
-                if (user != null && book != null)
-                {
-                    if (Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
-                    {
-                        BooksLists existing_booklist = Core.Context.BooksLists.First(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID);
-                        Core.Context.BooksLists.Remove(existing_booklist);
-                        Core.Context.SaveChanges();
-                    }
-
-                    int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 4).ListID;
-                    if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
-                    {
-                        Core.Context.BooksLists.Add(new BooksLists
-                        {
-                            BookID = book.BookID,
-                            ListID = idList
-                        });
-                        Core.Context.SaveChanges();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Уже в списке.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Только зарегистрированные пользователи могут пользоваться списками.");
-                }
-            }
+            ChangeLists(sender, 4);
         }
 
         private void AbandonedClick(object sender, RoutedEventArgs e)
         {
-            CreateLists();
+            ChangeLists(sender, 1);
+        }
 
+        private void ChangeLists(object sender, int typeID)
+        {
             Button btn = sender as Button;
 
             if (btn != null)
             {
                 Books book = btn.DataContext as Books;
-
                 Users user = NavigationData.CurrentData as Users;
 
                 if (user != null && book != null)
                 {
-                    if (Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID).Count() > 0)
+                    if (Core.Context.BooksLists.Where(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID && l.Lists.TypeID != typeID).Count() > 0)
                     {
                         BooksLists existing_booklist = Core.Context.BooksLists.First(l => l.BookID == book.BookID && l.Lists.UserID == user.UserID);
                         Core.Context.BooksLists.Remove(existing_booklist);
                         Core.Context.SaveChanges();
                     }
 
-                    int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == 1).ListID;
+                    int idList = Core.Context.Lists.First(l => l.UserID == user.UserID && l.TypeID == typeID).ListID;
+
                     if (Core.Context.BooksLists.Where(b => b.BookID == book.BookID && b.ListID == idList).Count() == 0)
                     {
                         Core.Context.BooksLists.Add(new BooksLists
