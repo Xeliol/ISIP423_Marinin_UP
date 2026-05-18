@@ -16,11 +16,11 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
             <Label Content="Пользователи" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
-            <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox x:Name="UsersBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                            <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ImagePath}" Height="50"/>
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
                                 <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
@@ -40,11 +40,11 @@
 
         <StackPanel Grid.Column="1">
             <Label Content="Книги" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
-            <ListBox x:Name="BooksListBox" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox x:Name="BooksListBox" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <StackPanel Orientation="Horizontal" Background="LightBlue">
+                            <StackPanel Orientation="Horizontal">
                                 <Image Source="{Binding ImagePath}" Height="50"/>
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5"></TextBlock>
                                 <TextBlock Text="{Binding Users.Name, StringFormat={}Автор: {0}}" VerticalAlignment="Center" Margin="5"></TextBlock>
@@ -62,11 +62,11 @@
         </StackPanel>
 
         <StackPanel Grid.Column="2">
-            <Label Content="Жалобы" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
-            <ListBox x:Name="ReviewListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <Label Content="Отзывы" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center"/>
+            <ListBox x:Name="ReviewListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="LightBlue">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Background="LightBlue">
+                        <StackPanel>
                             <TextBlock Text="{Binding Books.Name}" FontWeight="Bold"></TextBlock>
                             <TextBlock Text="{Binding Books.Users.Name}" FontSize="10"></TextBlock>
                             <StackPanel Orientation="Horizontal">

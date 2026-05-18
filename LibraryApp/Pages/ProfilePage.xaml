@@ -24,15 +24,14 @@
             <TextBlock Text="{Binding Login, StringFormat={}Логин: {0}}"></TextBlock>
             <TextBlock Text="{Binding Email, StringFormat={}Email: {0}}"></TextBlock>
         </StackPanel>
-        <StackPanel Grid.Column="1" >
+        <StackPanel Grid.Column="1">
             <Label Content="Отзывы" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center"></Label>
-            <ListBox x:Name="ReviewsListbox" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListBox x:Name="ReviewsListbox" Focusable="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="FloralWhite">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
                             <StackPanel.Style>
                                 <Style TargetType="StackPanel">
-                                    <Setter Property="Background" Value="FloralWhite" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Frozen}" Value="True">
                                             <Setter Property="Background" Value="LightBlue" />

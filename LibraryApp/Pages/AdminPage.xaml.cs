@@ -70,6 +70,16 @@ namespace LibraryApp.Pages
 
                 Core.Context.SaveChanges();
 
+                if(rep.TypeID == 2)
+                {
+                    Books cur_book = Core.Context.Books.First(b => b.BookID == rep.Reviews.Books.BookID);
+                    if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Count() > 0)
+                    {
+                        cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
+                        Core.Context.SaveChanges();
+                    }
+                }
+
                 ReportsListbox.ItemsSource = Core.Context.Reports.Where(r => r.Solved == false).ToList();
             }
         }
@@ -145,6 +155,18 @@ namespace LibraryApp.Pages
                         break;
                 }
 
+                Core.Context.SaveChanges();
+
+                if (rep.TypeID == 2)
+                {
+                    Books cur_book = Core.Context.Books.First(b => b.BookID == rep.Reviews.Books.BookID);
+                    if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Count() > 0)
+                    {
+                        cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
+                        Core.Context.SaveChanges();
+                    }
+                }
+
                 Core.Context.UnfreezeRequests.Remove(rep);
 
                 Core.Context.SaveChanges();
@@ -178,6 +200,16 @@ namespace LibraryApp.Pages
                 rep.Solved = true;
 
                 Core.Context.SaveChanges();
+
+                if (rep.TypeID == 2)
+                {
+                    Books cur_book = Core.Context.Books.First(b => b.BookID == rep.Reviews.Books.BookID);
+                    if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Count() > 0)
+                    {
+                        cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
+                        Core.Context.SaveChanges();
+                    }
+                }
 
                 ReportsListbox.ItemsSource = Core.Context.Reports.Where(r => r.Solved == false).ToList();
             }

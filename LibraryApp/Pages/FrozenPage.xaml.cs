@@ -82,6 +82,13 @@ namespace LibraryApp.Pages
 
                     Core.Context.SaveChanges();
 
+                    Books cur_book = Core.Context.Books.First(b => b.BookID == us.Books.BookID);
+                    if (cur_book != null && Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Count() > 0)
+                    {
+                        cur_book.Rating = Math.Round(Core.Context.Reviews.Where(r => r.BookID == cur_book.BookID && r.Frozen == false).Select(r => r.Rating).Average(), 1);
+                        Core.Context.SaveChanges();
+                    }
+
                     ReviewListBox.ItemsSource = Core.Context.Reviews.Where(u => u.Frozen == true).ToList();
                 }
             }
